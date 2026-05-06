@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Solar Power Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f9; text-align: center; }
+        .container { width: 80%; margin: auto; background: white; padding: 20px; border-radius: 10px; shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        canvas { max-height: 400px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Solar Panel Real-Time Output</h1>
+        <canvas id="solarChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('solarChart').getContext('2d');
+        const solarChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Wattage (W)',
+                    borderColor: 'rgb(255, 159, 64)',
+                    data: [],
+                    fill: false
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        async function updateData() {
+            const response = await fetch('/api/solar/stats');
+            const data = await response.json();
+            
+            // Reverse so newest is on the right
+            const reversedData = data.reverse(); 
+
+            solarChart.data.labels = reversedData.map(r => r.timestamp.split('T')[1].substring(0, 8));
+            solarChart.data.datasets[0].data = reversedData.map(r => r.wattage);
+            solarChart.update();
+        }
+
+        // Update the chart every 5 seconds
+        setInterval(updateData, 5000);
+        updateData();
+    </script>
+</body>
+</html>
