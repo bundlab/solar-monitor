@@ -1,5 +1,5 @@
 # 🚀 IoT Solar Power Monitor
-![Dashboard Preview](dashboard.png)
+![Dashboard Preview](assets/dashboard.png)
 
 - Title: Real-Time Solar Energy Monitoring System
 - Version: 1.0.0-SNAPSHOT
