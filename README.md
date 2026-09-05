@@ -38,36 +38,36 @@ Maven 3.6+
 Installation & Run
 Clone the repository:
 
-Bash
+```Bash
 git clone https://github.com/bundlab/solar-monitor.git
 cd solar-monitor
 Build the project:
-
-Bash
+```
+```Bash
 mvn clean install
 Run the application:
-
-Bash
+```
+```Bash
 mvn spring-boot:run
 Access the Dashboard:
 Open your browser and navigate to: http://localhost:8080/dashboard
-
+```
 ## 🔌 API Documentation
 Upload Reading
 POST /api/solar/upload
 
-JSON
+```JSON
 {
   "voltage": 18.5,
   "current": 2.1
 }
 Get Latest Stats
 GET /api/solar/stats
-
+```
 Returns the last 10 readings in JSON format.
 
 ## 📂 Project Structure
-Plaintext
+```Plaintext
 solar-monitor/
 ├── src/
 │   ├── main/
@@ -80,8 +80,8 @@ solar-monitor/
 │   │       ├── templates/    # HTML Dashboard
 │   │       └── application.properties
 └── pom.xml
-
+```
 ## 👤 Author
 bundlab
 
-Ubuntu 24.04 Enthusiast | Java Developer
+Ubuntu 24.04 Enthusiast | AI Developer
